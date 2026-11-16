@@ -1,0 +1,165 @@
+// _________________________________________________________________________________
+// WWWWWWWWWWWWWWWWWWWX ;0WWWWWWWWWWWWWWWWW [Killiza dotfiles]
+// WWWWWWWWWWWWWWWWWWWW dXWWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWWWN KWWWWWWWWWWWWWWWWWW [Version 1.0]
+// WWWWWWWWWWWWWWWWWWWK.NWWWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWWWd.WWWWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWWNX.WWWWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWWKK.WWWWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWWN' XWWWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWNo.  dNWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWNdcK0 No.lNWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWNX0XWWk WWWk'lKWWWWWWWWWWWW
+// WWWWWWWWWWWWx.0WWWWK KWWWWd cWWWWWWWWWWW
+// WWWWWWWWWWWWNxlXWWWk dWWWK;'xWWWWWWWWWWW
+// WWWWWWWWWWWWWWKl'0Wk dWWd.OWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWXNX;:KWWxWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWWKo ,WWWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWWWKlOWWWWWWWWWWWWWWWWWW
+// _________________________________________________________________________________
+
+{
+    "layer": "top",
+    "position": "top",
+    "height": 32,
+    "spacing": 0,
+    "margin-top": 0,
+    "margin-bottom": 0,
+
+// [MODULES LAYOUT]_________________________________________________________________
+    "modules-left": [
+        "clock",
+        "network",
+        "bluetooth",
+        "custom/gpu-temp",
+        "cpu",
+        "temperature"
+	    ],
+
+    "modules-center": [
+        "hyprland/window",
+        "hyprland/workspaces"
+    ],
+
+    "modules-right": [
+       "memory",
+        "custom/volume",
+        "custom/battery"
+    ],
+
+// [CLOCK]___________________________________________________________________________
+    "clock": {
+        "format": "{:%H:%M}  ",
+        "format-alt": "{:%A, %B %d, %Y (%R)} \ueab0",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+                    "mode"          : "year",
+                    "mode-mon-col"  : 3,
+                    "weeks-pos"     : "right",
+                    "on-scroll"     : 1,
+                    "format": {
+                              "months":     "<span color='#ccff00'><b>{}</b></span>",
+                              "days":       "<span color='#9900ff'><b>{}</b></span>",
+                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                              "weekdays":   "<span color='#ffd500'><b>{}</b></span>",
+                              "today":      "<span color='#ffd500'><b><u>{}</u></b></span>"
+                              }
+                    },
+        "actions":  {
+                    "on-click-right": "mode",
+                    "on-scroll-up": "tz_up",
+                    "on-scroll-down": "tz_down"
+                   
+                    }
+    },
+
+    "hyprland/workspaces": {
+        "format": "[ {id} ]",
+        "on-click": "activate",
+        "sort-by-number": true
+    },
+
+    "hyprland/window": {
+        "format": "[ {} ]",
+        "max-length": 30,
+        "separate-outputs": true
+    },
+
+// [NETWORK]_____________________________________________________________________
+
+  "network": {
+    "format-wifi": "{icon}",
+    "format-icons": ["[ 󰤯 ]", "[ 󰤟 ]", "[ 󰤢 ]", "[ 󰤥 ]", "[ 󰤨 ]"],
+    "format-ethernet": "[ 󰀂 ]",
+    "format-alt": "[ 󱛇 ]",
+    "format-disconnected": "󰖪",
+    "tooltip-format-wifi": "{icon} {essid}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-ethernet": "󰀂  {ifname}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-disconnected": "Disconnected",
+    "on-click": "nm-connection-editor",
+    "interval": 5,
+    "nospacing": 1
+  },
+
+// [BLUETOOTH]____________________________________________________________________
+
+    "bluetooth": {
+        "format": "[ BT ]",
+        "format-connected": "[ BT {device_alias} ]",
+        "format-off": "[ BT OFF ]",
+        "tooltip-format": "{status}"
+    },
+
+// ── Battery ──────────────────────────────────────────
+    "custom/battery": {
+        "exec": "~/.config/waybar/scripts/battery.sh",
+        "return-type": "json",
+        "interval": 10,
+        "on-click": "xfce4-power-manager-settings"
+    },
+
+// [CUSTOM TEMPS]________________________________________________________________
+    
+    "custom/gpu-temp": {
+        "exec": "cat /sys/class/hwmon/hwmon1/temp1_input | awk '{printf \"GPU %.0fC\", $1/1000}'",
+        "format": "[ {} ]",
+        "interval": 3
+    },
+
+    "cpu": {
+        "format": "[ CPU {usage}% ]",
+        "interval": 2,
+        "tooltip": true
+    },
+
+    "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmon3/temp3_input",
+        "critical-threshold": 85,
+        "format": "[ CPUTEMP {temperatureC}C ]",
+        "format-critical": "[ !! CPUTEMP {temperatureC}C ]",
+        "interval": 2
+    },
+
+// [RAM USAGE]_______________________________________________________________
+
+    "memory": {
+        "format": "[ RAM {used:0.1f}G / {total:0.1f}G ]",
+        "interval": 3,
+        "tooltip": true
+    },
+
+
+// [VOLUME]______________________________________________________
+
+  "custom/volume": {
+    "exec": "~/.config/waybar/scripts/volume.sh",
+    "return-type": "json",
+    "interval": 1,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+    "on-click-right": "pavucontrol"
+  },
+
+
+}

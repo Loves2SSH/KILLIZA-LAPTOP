@@ -1,0 +1,178 @@
+/* _________________________________________________________________________________
+// WWWWWWWWWWWWWWWWWWWX ;0WWWWWWWWWWWWWWWWW [Killiza dotfiles]
+// WWWWWWWWWWWWWWWWWWWW dXWWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWWWN KWWWWWWWWWWWWWWWWWW [Version 1.0]
+// WWWWWWWWWWWWWWWWWWWK.NWWWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWWWd.WWWWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWWNX.WWWWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWWKK.WWWWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWWN' XWWWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWNo.  dNWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWNdcK0 No.lNWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWNX0XWWk WWWk'lKWWWWWWWWWWWW
+// WWWWWWWWWWWWx.0WWWWK KWWWWd cWWWWWWWWWWW
+// WWWWWWWWWWWWNxlXWWWk dWWWK;'xWWWWWWWWWWW
+// WWWWWWWWWWWWWWKl'0Wk dWWd.OWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWXNX;:KWWxWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWWKo ,WWWWWWWWWWWWWWWWWW
+// WWWWWWWWWWWWWWWWWWWKlOWWWWWWWWWWWWWWWWWW
+*/
+
+/* [WAYBAR STYLING]___________________________________________________________ */
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 12px;
+  font-weight: 400;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: rgba(10, 10, 14, 0.95);
+  color: #ccff00;
+  border-bottom: 1px solid rgba(153, 0, 255, 0.5);
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+/* [TOOLTIPS]___________________________________________________________ */
+
+tooltip {
+  background: rgba(10, 10, 14, 0.98);
+  border: 1px solid #9900ff;
+  color: #ccff00;
+  font-size: 11px;
+}
+
+tooltip label {
+  color: #ccff00;
+}
+
+/* [CONTAINER MODULE STYLING]___________________________________________________________ */
+
+#clock,
+#workspaces,
+#network,
+#bluetooth,
+#custom-gpu-temp,
+#cpu,
+#temperature,
+#memory,
+#pulseaudio,
+#tray,
+#window {
+  color: #ccff00;
+  background: transparent;
+  padding: 0 4px;
+  margin: 4px 1px;
+}
+
+#clock {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* [WORKSPACES]___________________________________________________________ */
+
+#workspaces button {
+  color: rgba(204, 255, 0, 0.4);
+  background: transparent;
+  padding: 0 2px;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+  font-size: 12px;
+  transition: color 0.15s ease;
+}
+
+#workspaces button:hover {
+  background: rgba(153, 0, 255, 0.15);
+  color: #ccff00;
+}
+
+#workspaces button.active {
+  color: #9900ff;
+  font-weight: 700;
+  background: rgba(153, 0, 255, 0.12);
+}
+
+#workspaces button.urgent {
+  color: #ff003c;
+  animation: urgent-blink 0.8s linear infinite alternate;
+}
+
+@keyframes urgent-blink {
+  from {
+    color: #ff003c;
+  }
+  to {
+    color: rgba(255, 0, 60, 0.3);
+  }
+}
+
+#window {
+  color: rgba(204, 255, 0, 0.55);
+  font-style: italic;
+}
+
+#network.disconnected {
+  color: rgba(204, 255, 0, 0.3);
+}
+
+#bluetooth {
+  color: rgba(204, 255, 0, 0.6);
+}
+
+#bluetooth.connected {
+  color: #ccff00;
+}
+
+#bluetooth.off {
+  color: rgba(204, 255, 0, 0.25);
+}
+
+#custom-gpu-temp {
+  color: #ccff00;
+}
+
+#cpu.warning {
+  color: #ffb700;
+}
+
+#cpu.critical {
+  color: #ff003c;
+  animation: critical-blink 0.5s linear infinite alternate;
+}
+
+#temperature.critical {
+  color: #ff003c;
+  animation: critical-blink 0.5s linear infinite alternate;
+}
+
+@keyframes critical-blink {
+  from {
+    color: #ff003c;
+  }
+  to {
+    color: rgba(255, 0, 60, 0.3);
+  }
+}
+
+#memory {
+  color: #9900ff;
+  font-weight: 700;
+}
+
+#pulseaudio.muted {
+  color: rgba(204, 255, 0, 0.3);
+}
+
+#custom-volume,
+#custom-battery {
+  margin: 0 5px;
+}
